@@ -53,6 +53,9 @@ export const ListBody = styled.div`
 export const EmptyList = styled.div`
     font-weight: ${theme.typography.weight.bold};
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 `;
 
 export const ListItem = styled.div`

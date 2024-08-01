@@ -6,6 +6,8 @@ import Graphic from "../Graphic";
 import { AiOutlineDelete, AiFillCaretRight, AiOutlinePlus } from "react-icons/ai";
 import { theme } from "../../theme";
 import SkeletonList from "../Skeleton";
+import Lottie from "lottie-react";
+import emptyAnimation from "../../assets/animations/emptyAnimation.json";
 
 type ListProps = {
     title: string;
@@ -75,7 +77,11 @@ const List: React.FC<ListProps> = ({ title, data, filters, actions, withGraphics
                             </ListButton>
                         </ListSection>
                     </ListItem>
-                )) : <EmptyList>Nenhum item para listar!</EmptyList>}
+                )) : (
+                    <EmptyList>
+                        <Lottie style={{ height: "50vh" }} animationData={emptyAnimation} loop={true} />
+                    </EmptyList>
+                )}
             </ListBody>
         </ListContent>
     )
