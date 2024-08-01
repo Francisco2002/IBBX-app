@@ -1,16 +1,15 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Body, Content } from "./styles";
 import Header from "../Header";
-import List from "../List";
 
-const Layout: React.FC = () => {
+const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
     return (
         <Content>
             <Header />
 
             <Body>
-                <List />
+                {children}
             </Body>
         </Content>
     );

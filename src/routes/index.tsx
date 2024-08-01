@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "../pages/home";
-import AssetsPage from "../pages/assets";
-import SensorsPage from "../pages/sensors";
+import { lazy } from "react";
+const HomePage = lazy(() => import("../pages/home"));
+const AssetsPage = lazy(() => import("../pages/assets"));
+const SensorsPage = lazy(() => import("../pages/sensors"));
 
 const router = createBrowserRouter([
     {
@@ -10,11 +11,11 @@ const router = createBrowserRouter([
         index: true
     },
     {
-        path: "/assets",
+        path: "/assets/:id",
         element: <AssetsPage />
     },
     {
-        path: "/sensors",
+        path: "/assets/:assetId/sensors/:id",
         element: <SensorsPage />
     }
 ]);
