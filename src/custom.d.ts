@@ -7,6 +7,7 @@ type ListActions = {
     create: () => void;
     delete: (item: any) => void;
     click?: (item: any) => void;
+    back?: () => void;
 }
 
 type Option = {

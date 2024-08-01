@@ -1,9 +1,9 @@
 import React from "react";
-import { EmptyList, ListAddButton, ListBody, ListButton, ListContent, ListData, ListFilter, ListHeader, ListId, ListItem, ListSection, ListTitle } from "./styles";
+import { BackButton, EmptyList, ListAddButton, ListBlock, ListBody, ListButton, ListContent, ListData, ListHeader, ListId, ListItem, ListSection, ListTitle } from "./styles";
 import moment from "moment";
 import Filters from "../Filters";
 import Graphic from "../Graphic";
-import { AiOutlineDelete, AiFillCaretRight, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineDelete, AiFillCaretRight, AiOutlinePlus, AiFillCaretLeft } from "react-icons/ai";
 import { theme } from "../../theme";
 import SkeletonList from "../Skeleton";
 import Lottie from "lottie-react";
@@ -39,19 +39,28 @@ const List: React.FC<ListProps> = ({ title, data, filters, actions, withGraphics
     return loading ? <SkeletonList /> : (
         <ListContent>
             <ListHeader>
-                <ListTitle variant="title">{title}</ListTitle>
+                <ListBlock>
+                    {
+                        actions.back && (
+                            <BackButton onClick={actions.back}>
+                                <AiFillCaretLeft />
+                            </BackButton>
+                        )
+                    }
+                    <ListTitle variant="title">{title}</ListTitle>
+                </ListBlock>
                 
-                <ListFilter>
+                <ListBlock>
                     { filters && <Filters filters={filters} /> }
 
                     <ListAddButton onClick={actions.create}>
                         <AiOutlinePlus />
                     </ListAddButton>
-                </ListFilter>
+                </ListBlock>
             </ListHeader>
 
             {
-                withGraphics && <Graphic data={data} title={withGraphics.title} />
+                data.length > 0 && withGraphics && <Graphic data={data} title={withGraphics.title} />
             }
 
             <ListBody>

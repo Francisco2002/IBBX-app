@@ -17,10 +17,17 @@ export const ListHeader = styled.div`
     }
 `;
 
-export const ListFilter = styled.div`
+export const ListBlock = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+`;
+
+export const BackButton = styled.button`
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: ${theme.colors.gray}
 `;
 
 export const ListTitle = styled(Typography)``;

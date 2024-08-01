@@ -5,3 +5,7 @@ export const Container = styled.div`
     background-color: rgba(${theme.colors.darkHex}, .8);
     padding: 34px 30px;
 `;
+
+export const LogoContainer = styled.div`
+    cursor: pointer;
+`;

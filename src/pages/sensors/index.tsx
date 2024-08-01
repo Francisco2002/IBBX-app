@@ -191,7 +191,8 @@ const SensorsPage: React.FC = () => {
                 title={`Coletas do Sensor: ${sensor ? sensor.name : ""}`}
                 actions={{
                     create: () => setOpen(true),
-                    delete: handleDelete
+                    delete: handleDelete,
+                    back: () => navigate(`/assets/${assetId}`)
                 }}
                 loading={loading}
                 shape={shape}
@@ -209,8 +210,9 @@ const SensorsPage: React.FC = () => {
                     {
                         type: "select",
                         filter: (value) => {
-                            setCurrentSensor(value)
                             navigate(`/assets/${currentAsset}/sensors/${value}`);
+                            window.location.reload();
+                            setCurrentSensor(value);
                         },
                         data: sensors,
                         defaultValue: currentSensor

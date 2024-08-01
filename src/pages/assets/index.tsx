@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import List from "../../components/List";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useNavigation } from "react-router";
 import Form from "../../components/Forms/Form";
 import * as Yup from "yup";
-import api from "../../services/api";
 import { listSelectAssets } from "../../services/assets";
 import { listSensors, createSensor, deleteSensor } from "../../services/sensors";
 import { toast } from "react-toastify";
@@ -130,7 +129,15 @@ const AssetsPage: React.FC = () => {
             <List
                 title={`Sensores do Ativo: ${currentAsset ? currentAsset.name : ""}`}
                 filters={[
-                    {type: "select", filter: (value) => navigate(`/assets/${value}`), data: assets, defaultValue: id }
+                    {
+                        type: "select",
+                        filter: (value) => {
+                            navigate(`/assets/${value}`);
+                            window.location.reload();
+                        },
+                        data: assets,
+                        defaultValue: id
+                    }
                 ]}
                 loading={loading}
                 data={sensors}
@@ -138,7 +145,8 @@ const AssetsPage: React.FC = () => {
                 actions={{
                     click: (item) => navigate(`/assets/${item.assetId}/sensors/${item.id}`),
                     create: () => setOpen(true),
-                    delete: handleDelete
+                    delete: handleDelete,
+                    back: () => navigate("/")
                 }}
             />
         </>
