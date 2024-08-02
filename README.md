@@ -1,4 +1,4 @@
-# Desafio IBBX
+# Desafio IBBX - APP
 
 Nesse desafio, implementei um sistema de coletas de sensores cadastrados em ativos.
 
@@ -15,3 +15,11 @@ Nesse desafio, implementei um sistema de coletas de sensores cadastrados em ativ
 * Ao selecionar um sensor, a listagem e o gráfico são atualizados para as leituras do sensor selecionado.
 * O sistema, atualmente, só permite a criação de uma leitura por dia. Ao tentar criar uma nova leitura em uma data já cadastrada, aquela será atualizada.
 * Não é permitido a criação de leituras de sensor em datas posteriores a atual.
+
+Como rodar a aplicação:
+
+1. Instalar as dependencias do projeto:
+    npm install
+
+2. Executar o comando, para rodar o servidor
+    npm run start
