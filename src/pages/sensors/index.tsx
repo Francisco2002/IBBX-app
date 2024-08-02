@@ -27,7 +27,7 @@ const SensorsPage: React.FC = () => {
 
     const schema = Yup.object().shape({
         sensor_id: Yup.number().required("Campo obrigatório"),
-        date: Yup.string().required("Campo obrigatório"),
+        date: Yup.date().max(moment().format("YYYY-MM-DD"), "Data inválida").required("Campo obrigatório"),
         value: Yup.number().required("Campo obrigatório")
     });
 

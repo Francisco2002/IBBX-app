@@ -14,3 +14,4 @@ Nesse desafio, implementei um sistema de coletas de sensores cadastrados em ativ
 * É exibido, acima da listagem, um gráfico de linha que contém as leituras por data.
 * Ao selecionar um sensor, a listagem e o gráfico são atualizados para as leituras do sensor selecionado.
 * O sistema, atualmente, só permite a criação de uma leitura por dia. Ao tentar criar uma nova leitura em uma data já cadastrada, aquela será atualizada.
+* Não é permitido a criação de leituras de sensor em datas posteriores a atual.
