@@ -65,9 +65,9 @@ const List: React.FC<ListProps> = ({ title, data, filters, actions, withGraphics
 
             <ListBody>
                 {data.length > 0 ? data.map((item) => (
-                    <ListItem key={item[shape.identifier]}>
+                    <ListItem key={item[shape.identifier.name]}>
                         <ListSection>
-                            <ListId>{item[shape.identifier]}</ListId>
+                            <ListId>{columnFormat(item, shape.identifier)}</ListId>
                             {
                                 shape.columns.map((column, index) => <ListData key={index.toString()}>{columnFormat(item, column)}</ListData>)
                             }

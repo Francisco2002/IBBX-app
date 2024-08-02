@@ -37,35 +37,65 @@ const SensorsPage: React.FC = () => {
             name: "asset_id",
             initialValue: assetId,
             options: assets,
-            placeholder: "Ativo"
         },
         {
             type: "select",
             name: "sensor_id",
             initialValue: id,
             options: sensors,
-            placeholder: "Sensor"
         },
         {
             type: "input",
             name: "date",
             inputType: "date",
             initialValue: moment().format("YYYY-MM-DD"),
-            placeholder: "Data"
+            props: {
+                placeholder: "Data",
+                max: moment().format("YYYY-MM-DD")
+            }
         },
         {
             type: "input",
             name: "value",
             inputType: "number",
             initialValue: "",
-            placeholder: "Leitura"
+            props: {
+                placeholder: "Leitura"
+            }
         },
     ];
 
+    const actions: ListActions = {
+        create: () => setOpen(true),
+        delete: handleDelete,
+        back: () => navigate(`/assets/${assetId}`)
+    }
+
+    const filters: Filter[] = [
+        {
+            type: "select",
+            filter: (value) => {
+                setCurrentSensor(undefined);
+                fetchSensors(value);
+            },
+            data: assets,
+            defaultValue: assetId
+        },
+        {
+            type: "select",
+            filter: (value) => {
+                navigate(`/assets/${currentAsset}/sensors/${value}`);
+                window.location.reload();
+                setCurrentSensor(value);
+            },
+            data: sensors,
+            defaultValue: currentSensor
+        }
+    ]
+
     const shape: Shape = {
-        identifier: "id",
+        identifier: { name: "date", type: "date" },
         columns: [
-            { name: "date", type: "date" },
             { name: "value" }
         ]
     }
@@ -79,13 +109,6 @@ const SensorsPage: React.FC = () => {
         }
 
         setLoading(false);
-        /* try {
-            const { data } = await api.get(`/assets`);
-
-            setAssets(data.map((as: any) => ({ value: as.id, label: as.name })));
-        } catch (error) {
-            console.log(error);
-        } */
     }
 
     async function fetchSensors(asset_id: any) {
@@ -95,14 +118,6 @@ const SensorsPage: React.FC = () => {
             setCurrentAsset(asset_id);
             setSensors(res.body);
         }
-        /* try {
-            const { data } = await api.get(`/assets/${asset_id}/sensors`);
-
-            setCurrentAsset(asset_id);
-            setSensors(data.sensors.map((as: any) => ({ value: as.id, label: as.name })));
-        } catch (error) {
-            console.log(error);
-        } */
     }
 
     async function fetchCollects() {
@@ -117,15 +132,6 @@ const SensorsPage: React.FC = () => {
             setSensor(res.body);
             setCollects(res.body.collects);
         }
-
-        /* try {
-            const { data } = await api.get(`/assets/${assetId}/sensors/${id}`);
-
-            setSensor(data);
-            setCollects(data.collects);
-        } catch (error) {
-            console.log(error);
-        } */
     }
 
     async function handleCreateCollect(collectData: any) {
@@ -189,35 +195,11 @@ const SensorsPage: React.FC = () => {
             />
             <List
                 title={`Coletas do Sensor: ${sensor ? sensor.name : ""}`}
-                actions={{
-                    create: () => setOpen(true),
-                    delete: handleDelete,
-                    back: () => navigate(`/assets/${assetId}`)
-                }}
+                actions={actions}
                 loading={loading}
                 shape={shape}
                 data={collects}
-                filters={[
-                    {
-                        type: "select",
-                        filter: (value) => {
-                            setCurrentSensor(undefined);
-                            fetchSensors(value);
-                        },
-                        data: assets,
-                        defaultValue: assetId
-                    },
-                    {
-                        type: "select",
-                        filter: (value) => {
-                            navigate(`/assets/${currentAsset}/sensors/${value}`);
-                            window.location.reload();
-                            setCurrentSensor(value);
-                        },
-                        data: sensors,
-                        defaultValue: currentSensor
-                    }
-                ]}
+                filters={filters}
                 withGraphics={{ title: `Leituras do Sensor: ${sensor ? sensor.name : ""}` }}
             />
         </>

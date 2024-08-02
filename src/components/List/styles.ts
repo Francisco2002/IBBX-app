@@ -27,7 +27,7 @@ export const BackButton = styled.button`
     background-color: transparent;
     font-size: 20px;
     cursor: pointer;
-    color: ${theme.colors.gray}
+    color: ${theme.colors.gray};
 `;
 
 export const ListTitle = styled(Typography)``;
@@ -96,9 +96,10 @@ export const ListSection = styled.div`
 `;
 
 export const ListId = styled.div`
-    width: 50px;
+    min-width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 10px;
+    padding: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;

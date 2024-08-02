@@ -62,11 +62,9 @@ const FormComponent: React.FC<FormProps> = (props) => {
                                     switch(field.type) {
                                         case "input":
                                             return <TextInput
+                                                        {...field.props}
                                                         key={index.toString()}
                                                         name={field.name}
-                                                        className={[field.className, ""].join(" ")}
-                                                        style={field.styles}
-                                                        placeholder={field.placeholder}
                                                         onChange={handleChange}
                                                         value={values[field.name]}
                                                         type={field.inputType || "text"}
@@ -74,22 +72,19 @@ const FormComponent: React.FC<FormProps> = (props) => {
                                                     />
                                         case "select":
                                             return <Select
+                                                        {...field.props}
                                                         key={index.toString()}
                                                         name={field.name}
                                                         options={field.options || []}
-                                                        className={[field.className, ""].join(" ")}
-                                                        style={field.styles}
                                                         onChange={handleChange}
                                                         value={values[field.name]}
                                                         error={errors[field.name] && touched[field.name] && errors[field.name]}
                                                     />
                                         case "textarea":
                                             return <TextArea
+                                                        {...field.props}
                                                         key={index.toString()}
                                                         name={field.name}
-                                                        className={[field.className, ""].join(" ")}
-                                                        style={field.styles}
-                                                        placeholder={field.placeholder}
                                                         onChange={handleChange}
                                                         value={values[field.name]}
                                                         error={errors[field.name] && touched[field.name] && errors[field.name]}

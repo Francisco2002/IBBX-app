@@ -21,9 +21,11 @@ type Field = {
     name: string;
     initialValue?: any;
     options?: Option[];
-    placeholder: string;
+    props?: any;
+
+    /* placeholder: string;
     className?: string;
-    styles?: any;
+    styles?: any; */
 }
 
 type Filter = {
@@ -39,7 +41,7 @@ type Column = {
 }
 
 type Shape = {
-    identifier: string;
+    identifier: Column;
     columns: Column[];
 }
 

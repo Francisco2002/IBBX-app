@@ -24,12 +24,20 @@ const HomePage: React.FC = () => {
             type: "input",
             name: "name",
             initialValue: "",
-            placeholder: "Nome do Ativo"
+            props: {
+                placeholder: "Nome do Ativo"
+            }
         }
     ];
 
+    const actions: ListActions = {
+        click: (item) => navigate(`/assets/${item.id}`),
+        create: () => setOpen(true),
+        delete: handleDelete
+    }
+
     const shape: Shape = {
-        identifier: "id",
+        identifier: {name: "id"},
         columns: [{ name: "name" }]
     }
 
@@ -110,11 +118,7 @@ const HomePage: React.FC = () => {
                 shape={shape}
                 loading={loading}
                 data={assets}
-                actions={{
-                    click: (item) => navigate(`/assets/${item.id}`),
-                    create: () => setOpen(true),
-                    delete: handleDelete
-                }}
+                actions={actions}
             />
         </>
     );

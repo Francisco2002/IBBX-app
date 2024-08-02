@@ -31,19 +31,39 @@ const AssetsPage: React.FC = () => {
             type: "input",
             name: "name",
             initialValue: "",
-            placeholder: "Nome do Sensor"
+            props: {
+                placeholder: "Nome do Sensor"
+            }
         },
         {
             type: "select",
             name: "assetId",
             options: assets,
             initialValue: id,
-            placeholder: "Selecione um ativo"
         },
     ];
 
+    const filters: Filter[] = [
+        {
+            type: "select",
+            filter: (value) => {
+                navigate(`/assets/${value}`);
+                window.location.reload();
+            },
+            data: assets,
+            defaultValue: id
+        }
+    ];
+
+    const actions: ListActions = {
+        click: (item) => navigate(`/assets/${item.assetId}/sensors/${item.id}`),
+        create: () => setOpen(true),
+        delete: handleDelete,
+        back: () => navigate("/")
+    }
+
     const shape: Shape = {
-        identifier: "id",
+        identifier: { name: "id" },
         columns: [{ name: "name" }]
     }
 
@@ -128,26 +148,11 @@ const AssetsPage: React.FC = () => {
             />
             <List
                 title={`Sensores do Ativo: ${currentAsset ? currentAsset.name : ""}`}
-                filters={[
-                    {
-                        type: "select",
-                        filter: (value) => {
-                            navigate(`/assets/${value}`);
-                            window.location.reload();
-                        },
-                        data: assets,
-                        defaultValue: id
-                    }
-                ]}
+                filters={filters}
                 loading={loading}
                 data={sensors}
                 shape={shape}
-                actions={{
-                    click: (item) => navigate(`/assets/${item.assetId}/sensors/${item.id}`),
-                    create: () => setOpen(true),
-                    delete: handleDelete,
-                    back: () => navigate("/")
-                }}
+                actions={actions}
             />
         </>
     );
