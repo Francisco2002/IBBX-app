@@ -18,8 +18,8 @@ Nesse desafio, implementei um sistema de coletas de sensores cadastrados em ativ
 
 Como rodar a aplicação:
 
-1. Instalar as dependencias do projeto:
+1. Instalar as dependencias do projeto:\
     npm install
 
-2. Executar o comando, para rodar a aplicação:
+2. Executar o comando, para rodar a aplicação:\
     npm run start
